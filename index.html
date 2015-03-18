@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>临时指向</title>
+    <title>临时指向：分形构图L-Systems Turtle Graphics Renderer</title>
 
     <style>
      .templink {
-       width: 100%;
-       height: 100%;
+       width: 1%;
+       height: 1%;
        display: block;
        position: fixed;
        z-index: 100;
@@ -20,9 +20,217 @@
      }
     </style>
 
+ <script src="js/lsystems.js"></script>
+      <script>
+function openHelp()
+{
+   document.getElementById("help").style.display = "block";
+}
+function closeHelp()
+{
+   document.getElementById("help").style.display = "none";
+}
+      </script>
+      <style type="text/css">
+body
+{
+   background-color: #ddd;
+   font-family: sans,sans-serif;
+   color: darkblue;
+}
+a, a:visited, a:active, a:hover
+{
+   color: #000044;
+}
+.example
+{
+   border: 1px solid lightgrey;
+   cursor: pointer;
+   -moz-box-shadow: 3px 3px 4px #444;
+   -webkit-box-shadow: 3px 3px 4px #444;
+   box-shadow: 3px 3px 4px #444;
+}
+.examples-title
+{
+   height: 24px;
+   text-align: center;
+}
+.examples
+{
+   float: right;
+   overflow-y: auto;
+   overflow-x: hidden;
+   padding-right: 18px;
+   padding-top: 42px;
+   xborder: 1px solid darkgrey;
+}
+.ex-left
+{
+   float: left;
+   padding-right: 6px;
+}
+.ex-right
+{
+   width: 250px;
+   margin-bottom: 2px;
+}
+canvas
+{
+   background-color: white;
+   border: 1px solid grey;
+   -moz-box-shadow: 3px 3px 6px #444;
+   -webkit-box-shadow: 3px 3px 6px #444;
+   box-shadow: 3px 3px 6px #444;
+}
+input[type="text"]
+{
+   border: none;
+   -moz-box-shadow: inset 2px 2px 5px #888;
+   -webkit-box-shadow: inset 2px 2px 5px #888;
+   box-shadow: inset 2px 2px 5px #888;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+   margin: 1px;
+   padding: 5px;
+}
+      </style>   
+    
+    
   </head>
   
   <body>
+      <div>
+         <div class="examples">
+            <div class="examples-title">现成示例</div>
+            <div class="ex-left">
+               <img onclick="example(0)" src="images/heighway_dragon.png" title="Heighway Dragon" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(2)" src="images/kevs_tree.png" title="Kevs Tree" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(3)" src="images/kevs_wispy_tree.png" title="Kevs Wispy Tree" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(4)" src="images/kevs_pond_weed.png" title="Kevs Pond Weed" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(8)" src="images/fractal_plant.png" title="Fractal Plant" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(1)" src="images/koch_curve.png" title="Koch Curve" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(5)" src="images/sip_triangle_curves.png" title="Sierpinski triangle (curves)" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(6)" src="images/sip_triangle_triangles.png" title="Sierpinski triangle (triangles)" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(7)" src="images/dragon_curve.png" title="Dragon Curve" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(9)" src="images/koch_snowflake.png" title="Koch Snowflake" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(10)" src="images/pleasant_error.png" title="Pleasant Error" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(11)" src="images/sierpinski_carpet.png" title="Sierpinski's Carpet" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(12)" src="images/space_filling_curve.png" title="Space Filling Curve" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(13)" src="images/sierpinski_median_curve.png" title="Sierpinski Median Curve" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(14)" src="images/lace.png" title="Lace" class="example" height="120" width="120">
+            </div>
+            <div class="ex-right">
+               <img onclick="example(15)" src="images/joined_cross_curves.png" title="Joined Cross Curves" class="example" height="120" width="120">
+            </div>
+            <div class="ex-left">
+               <img onclick="example(16)" src="images/penrose_tiling.png" title="Penrose Tiling" class="example" height="120" width="120">
+            </div>
+         </div>
+         
+         <div id="help" style="display:none;left:100px;top:60px;width:480px;height:310px;position:absolute;background-color:#eeeeee;border: 2px solid grey;padding:12px;z-index:100">
+L-Systems, or <a href="http://en.wikipedia.org/wiki/L-system" target="new">Lindenmayer System</a> is a simple but elegant 'turtle' rendering platform.<br><br>
+The recursive nature of the L-system rules leads to self-similarity and 
+thereby fractal-like forms which are easy to describe with an L-system. 
+Plant models and natural-looking organic forms 'grow' and becomes more 
+complex by increasing the iteration level of the form.<br><br>
+Click on the Examples to view some example and famous L-System patterns.<br>
+            <div style="text-align:center"><a href="#" onclick="closeHelp()">关了</a></div>
+         </div>
+         
+         <div id="lsystems" style="width:512px; float:left">
+            <div style="position:absolute;left:380px;top:32px">
+               <a href="#" onclick="openHelp()">什么是L-Systems?</a>
+            </div>
+            <div>
+               <table border="0" cellpadding="1" cellspacing="1">
+                  <tbody><tr>
+                     <td><span>Iterations:</span></td>
+                     <td>
+                        <input id="iterations" value="12" style="width:4em" type="text">
+                        <div style="display:inline">
+                           <input id="linewidths" type="checkbox">
+                           <label for="linewidths">Auto Line Width</label>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td><span>Angle:</span></td>
+                     <td><input id="angle" value="90" style="width:4em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Constants:</span></td>
+                     <td><input id="constants" style="width:12em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Axoim:</span></td>
+                     <td><input id="axiom" value="FX" style="width:12em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Rule1:</span></td>
+                     <td><input id="rule1" value="X=X+YF+" style="width:30em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Rule2:</span></td>
+                     <td><input id="rule2" value="Y=-FX-Y" style="width:30em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Rule3:</span></td>
+                     <td><input id="rule3" style="width:30em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Rule4:</span></td>
+                     <td><input id="rule4" style="width:30em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td><span>Rule5:</span></td>
+                     <td><input id="rule5" style="width:30em" type="text"></td>
+                  </tr>
+                  <tr>
+                     <td colspan="2"><input id="start" value="开始渲染生成" onclick="startHandler()" type="button"></td>
+                  </tr>
+               </tbody></table>
+            </div>
+            
+            <div id="status" style="padding:4px;font-family:courier new">Press Start to begin.</div>
+            
+            <div>
+               <canvas id="canvas" width="600" height="600"></canvas>
+            </div>
+            
+         </div>
+      </div>
+      
+    
+    
     
     <iframe class="templink" src="http://shop115364028.taobao.com"></iframe>
     
