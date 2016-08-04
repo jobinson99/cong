@@ -8,18 +8,6 @@
 
     <title>临时指向：分形构图L-Systems Turtle Graphics Renderer</title>
 
-    <style>
-     .templink {
-       width: 1%;
-       height: 1%;
-       display: block;
-       position: fixed;
-       z-index: 100;
-       margin-top: -10px;
-       margin-left: -10px;
-     }
-    </style>
-
  <script src="js/lsystems.js"></script>
       <script>
 function openHelp()
@@ -156,7 +144,7 @@ input[type="text"]
             </div>
          </div>
          
-         <div id="help" style="display:none;left:100px;top:60px;width:480px;height:310px;position:absolute;background-color:#eeeeee;border: 2px solid grey;padding:12px;z-index:100">
+         <div id="help" style="display:none;left:200px;top:60px;width:480px;height:310px;position:absolute;background-color:#eeeeee;border: 2px solid grey;padding:12px;z-index:100">
 L-Systems, or <a href="http://en.wikipedia.org/wiki/L-system" target="new">Lindenmayer System</a> is a simple but elegant 'turtle' rendering platform.<br><br>
 The recursive nature of the L-system rules leads to self-similarity and 
 thereby fractal-like forms which are easy to describe with an L-system. 
@@ -167,23 +155,23 @@ Click on the Examples to view some example and famous L-System patterns.<br>
          </div>
          
          <div id="lsystems" style="width:512px; float:left">
-            <div style="position:absolute;left:380px;top:32px">
-               <a href="#" onclick="openHelp()">什么是L-Systems?</a>
+            <div style="position:absolute;left:580px;top:2px">
+               <a href="#" onclick="openHelp()">关于我?</a>
             </div>
             <div>
                <table border="0" cellpadding="1" cellspacing="1">
                   <tbody><tr>
-                     <td><span>Iterations:</span></td>
+                     <td><span>嵌套深度:</span></td>
                      <td>
                         <input id="iterations" value="12" style="width:4em" type="text">
                         <div style="display:inline">
                            <input id="linewidths" type="checkbox">
-                           <label for="linewidths">Auto Line Width</label>
+                           <label for="linewidths">自动线宽</label>
                         </div>
                      </td>
                   </tr>
                   <tr>
-                     <td><span>Angle:</span></td>
+                     <td><span>角度:</span></td>
                      <td><input id="angle" value="90" style="width:4em" type="text"></td>
                   </tr>
                   <tr>
@@ -195,23 +183,23 @@ Click on the Examples to view some example and famous L-System patterns.<br>
                      <td><input id="axiom" value="FX" style="width:12em" type="text"></td>
                   </tr>
                   <tr>
-                     <td><span>Rule1:</span></td>
+                     <td><span>规则1:</span></td>
                      <td><input id="rule1" value="X=X+YF+" style="width:30em" type="text"></td>
                   </tr>
                   <tr>
-                     <td><span>Rule2:</span></td>
+                     <td><span>规则2:</span></td>
                      <td><input id="rule2" value="Y=-FX-Y" style="width:30em" type="text"></td>
                   </tr>
                   <tr>
-                     <td><span>Rule3:</span></td>
+                     <td><span>规则3:</span></td>
                      <td><input id="rule3" style="width:30em" type="text"></td>
                   </tr>
                   <tr>
-                     <td><span>Rule4:</span></td>
+                     <td><span>规则4:</span></td>
                      <td><input id="rule4" style="width:30em" type="text"></td>
                   </tr>
                   <tr>
-                     <td><span>Rule5:</span></td>
+                     <td><span>规则5:</span></td>
                      <td><input id="rule5" style="width:30em" type="text"></td>
                   </tr>
                   <tr>
@@ -220,7 +208,7 @@ Click on the Examples to view some example and famous L-System patterns.<br>
                </tbody></table>
             </div>
             
-            <div id="status" style="padding:4px;font-family:courier new">Press Start to begin.</div>
+            <div id="status" style="padding:4px;font-family:courier new">可按上面按钮开始渲染</div>
             
             <div>
                <canvas id="canvas" width="600" height="600"></canvas>
@@ -229,10 +217,7 @@ Click on the Examples to view some example and famous L-System patterns.<br>
          </div>
       </div>
       
-    
-    
-    
-    <iframe class="templink" src="http://shop115364028.taobao.com"></iframe>
+
     
   </body>
 </html>
